@@ -6887,16 +6887,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 128.27) (xy 100.33 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30ff9627-198a-471b-80e4-7b10cebbbfbe")
-	)
-	(wire
-		(pts
 			(xy 229.87 81.28) (xy 229.87 83.82)
 		)
 		(stroke
@@ -6914,6 +6904,16 @@
 			(type default)
 		)
 		(uuid "3f834909-05d2-4cf7-995a-e193d7578ab6")
+	)
+	(wire
+		(pts
+			(xy 102.87 132.08) (xy 102.87 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f84a2cb-010f-429e-9f3b-8495ab856f08")
 	)
 	(wire
 		(pts
@@ -7177,6 +7177,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 128.27) (xy 100.33 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7d9d524-e026-4539-a528-c34f25daaca6")
+	)
+	(wire
+		(pts
 			(xy 267.97 30.48) (xy 267.97 31.75)
 		)
 		(stroke
@@ -7214,16 +7224,6 @@
 			(type default)
 		)
 		(uuid "af085df8-6365-42e4-9b61-7363e3457b07")
-	)
-	(wire
-		(pts
-			(xy 105.41 132.08) (xy 105.41 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af45c626-f71f-4b09-a6a2-192253072427")
 	)
 	(wire
 		(pts
@@ -7297,6 +7297,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 132.08) (xy 114.3 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cccef352-a565-4758-bf00-73746f0b96ef")
+	)
+	(wire
+		(pts
 			(xy 100.33 161.29) (xy 100.33 166.37)
 		)
 		(stroke
@@ -7317,7 +7327,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 124.46) (xy 105.41 124.46)
+			(xy 100.33 124.46) (xy 114.3 124.46)
 		)
 		(stroke
 			(width 0)
@@ -7796,7 +7806,7 @@
 		(uuid "91fb2a49-c9f4-4c9f-a9bf-77704f6d9f1a")
 	)
 	(label "MOTORA"
-		(at 105.41 128.27 0)
+		(at 114.3 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8268,7 +8278,7 @@
 	(symbol
 		(lib_name "0603,1uF_2")
 		(lib_id "PCM_JLCPCB-Capacitors:0603,1uF")
-		(at 105.41 128.27 0)
+		(at 114.3 128.27 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8276,7 +8286,7 @@
 		(dnp no)
 		(uuid "07769d7d-6f70-42dd-ba49-f0de5ee07c44")
 		(property "Reference" "C29"
-			(at 107.95 125.7299 0)
+			(at 116.84 125.7299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8285,7 +8295,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 107.95 128.27 0)
+			(at 116.84 128.27 0)
 			(effects
 				(font
 					(size 0.8 0.8)
@@ -8294,7 +8304,7 @@
 			)
 		)
 		(property "Footprint" "PCM_JLCPCB:C_0603"
-			(at 103.632 128.27 90)
+			(at 112.522 128.27 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8303,7 +8313,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8312,7 +8322,7 @@
 			)
 		)
 		(property "Description" "50V 1uF X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8321,7 +8331,7 @@
 			)
 		)
 		(property "LCSC" "C6119857"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8330,7 +8340,7 @@
 			)
 		)
 		(property "Stock" "11587280"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8339,7 +8349,7 @@
 			)
 		)
 		(property "Price" "0.008USD"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8348,7 +8358,7 @@
 			)
 		)
 		(property "Process" "SMT"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8357,7 +8367,7 @@
 			)
 		)
 		(property "Minimum Qty" "20"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8366,7 +8376,7 @@
 			)
 		)
 		(property "Attrition Qty" "10"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8375,7 +8385,7 @@
 			)
 		)
 		(property "Class" "Basic Component"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8384,7 +8394,7 @@
 			)
 		)
 		(property "Category" "Capacitors,Multilayer Ceramic Capacitors MLCC - SMD/SMT"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8393,7 +8403,7 @@
 			)
 		)
 		(property "Manufacturer" ""
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8402,7 +8412,7 @@
 			)
 		)
 		(property "Part" ""
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8411,7 +8421,7 @@
 			)
 		)
 		(property "Voltage Rated" "50V"
-			(at 110.998 128.27 0)
+			(at 119.888 128.27 0)
 			(effects
 				(font
 					(size 0.8 0.8)
@@ -8420,7 +8430,7 @@
 			)
 		)
 		(property "Tolerance" "±10%"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8429,7 +8439,7 @@
 			)
 		)
 		(property "Capacitance" "1uF"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8438,7 +8448,7 @@
 			)
 		)
 		(property "Temperature Coefficient" "X5R"
-			(at 105.41 128.27 0)
+			(at 114.3 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)

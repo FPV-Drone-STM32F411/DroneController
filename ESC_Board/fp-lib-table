@@ -3,4 +3,6 @@
   (lib (name "DRV")(type "KiCad")(uri "${KIPRJMOD}/DRV3800/ul_DRV8300DRGER/KiCADv6/footprints.pretty")(options "")(descr ""))
   (lib (name "TLV")(type "KiCad")(uri "${KIPRJMOD}/TLV765501/KiCADv6/footprints.pretty")(options "")(descr ""))
   (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/Spade/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "easty")(type "KiCad")(uri "C:/Users/evanb/Documents/KiCad/easyeda2kicad/easyeda2kicad.3dshapes")(options "")(descr ""))
+  (lib (name "easy")(type "KiCad")(uri "C:/Users/evanb/Documents/KiCad/easyeda2kicad/easyeda2kicad.pretty")(options "")(descr ""))
 )

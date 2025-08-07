@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 0.0,
+          "height": 0.62,
+          "width": 0.56
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -227,6 +227,10 @@
         {
           "diameter": 0.45,
           "drill": 0.3
+        },
+        {
+          "diameter": 0.55,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -807,6 +811,222 @@
           "group_by": false,
           "label": "Drain Source Voltage (Vdss)",
           "name": "Drain Source Voltage (Vdss)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CASE",
+          "name": "CASE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CONFIGURATION",
+          "name": "CONFIGURATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PACKAGE",
+          "name": "PACKAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PARTREV",
+          "name": "PARTREV",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PART_DESCRIPTION",
+          "name": "PART_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PITCH",
+          "name": "PITCH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PUBLISHED",
+          "name": "PUBLISHED",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PUBLISHER",
+          "name": "PUBLISHER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LIBRARY_REF",
+          "name": "LIBRARY_REF",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CONNECTOR",
+          "name": "CONNECTOR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LIBRARY_PATH",
+          "name": "LIBRARY_PATH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DESIGNATOR",
+          "name": "DESIGNATOR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER_LINK",
+          "name": "MANUFACTURER_LINK",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_REFERANCE",
+          "name": "FOOTPRINT_REFERANCE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "RESISTANCE",
+          "name": "RESISTANCE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ROHS_COMPLIANT",
+          "name": "ROHS_COMPLIANT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ORIENTATION",
+          "name": "ORIENTATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SERIES",
+          "name": "SERIES",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SIGNAL_INTEGRITY",
+          "name": "SIGNAL_INTEGRITY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SPICE_MODEL",
+          "name": "SPICE_MODEL",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "STANDARD",
+          "name": "STANDARD",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NO_OF_POSITION",
+          "name": "NO_OF_POSITION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TECHNOLOGY",
+          "name": "TECHNOLOGY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TE_PART_NUMBER",
+          "name": "TE_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TYPE",
+          "name": "TYPE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "GENDER",
+          "name": "GENDER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FINISH",
+          "name": "FINISH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER",
+          "name": "MANUFACTURER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT",
+          "name": "FOOTPRINT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VOLTAGE_AC",
+          "name": "VOLTAGE_AC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VOLTAGE_DC",
+          "name": "VOLTAGE_DC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CURRENT_RATING",
+          "name": "CURRENT_RATING",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_PATH",
+          "name": "FOOTPRINT_PATH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "APPLICATION",
+          "name": "APPLICATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LATEST_REVISION_DATE",
+          "name": "LATEST_REVISION_DATE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LATEST_REVISION_NOTE",
+          "name": "LATEST_REVISION_NOTE",
           "show": false
         }
       ],
