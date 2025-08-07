@@ -125,7 +125,8 @@ This drone design is compatible with:
 **MKII Flight Computer 3D Model**
 
 
-<img width="926" height="811" alt="image" src="https://github.com/user-attachments/assets/b4ea57c4-2f34-4e02-94b0-a1295131fdb5" />
+<img width="1088" height="837" alt="image" src="https://github.com/user-attachments/assets/3e55b5f0-1f1c-447c-a083-5341c130609a" />
+
 
 
 
