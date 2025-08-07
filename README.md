@@ -105,9 +105,26 @@ This drone design is compatible with:
 6. Full flight testing
 
 # Media
+### MKI of Electric Speed Controller (ESC)
+
+**MKI of ESC 3D Model**
+
+<img width="885" height="836" alt="image" src="https://github.com/user-attachments/assets/f082285e-2f15-4693-bd55-5e7dd71b4ff9" />
+
+**MKI of ESC PCB**
+
+<img width="790" height="846" alt="image" src="https://github.com/user-attachments/assets/320f64b6-7d53-4173-aa7f-00f5b51774b2" />
+
+**MKI of ESC Schematic**
+
+<img width="828" height="537" alt="image" src="https://github.com/user-attachments/assets/091e5204-9e30-41e9-a268-0c44c239c64b" />
+
+
 ### MKII of Flight Computer (Most Updated)
 
 **MKII Flight Computer 3D Model**
+
+
 <img width="1585" height="1537" alt="image" src="https://github.com/user-attachments/assets/4a1bf0b9-8b31-4664-99bb-4b8587f5d55a" />
 
 
