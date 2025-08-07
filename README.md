@@ -1,5 +1,5 @@
 
-# FPV Drone PCB Full PCB + Assembly - Work in Progress
+# FPV Drone PCB Full PCB + Assembly
 
 A comprehensive open-source avionics ecosystem for FPV drones featuring a completed flight computer PCB along with in-development power distribution and electronic speed controller PCB. This project delivers an avionics stack for a custom drone with full schematic and PCB files available on KiCad 9.0.
 
