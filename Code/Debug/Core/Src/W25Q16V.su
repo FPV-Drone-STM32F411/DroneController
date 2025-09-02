@@ -1,0 +1,3 @@
+../Core/Src/W25Q16V.c:5:20:CS_L	8	static
+../Core/Src/W25Q16V.c:6:20:CS_H	8	static
+../Core/Src/W25Q16V.c:8:19:W25_ReadJEDEC	40	static

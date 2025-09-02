@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.6,
-          "height": 2.0,
-          "width": 1.2
+          "drill": 0.0,
+          "height": 0.62,
+          "width": 0.56
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.4
         }
       },
       "diff_pair_dimensions": [
@@ -56,11 +56,6 @@
           "gap": 0.0,
           "via_gap": 0.0,
           "width": 0.0
-        },
-        {
-          "gap": 0.2032,
-          "via_gap": 0.0,
-          "width": 0.158242
         }
       ],
       "drc_exclusions": [],
@@ -128,11 +123,11 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
+        "min_clearance": 0.15,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.0,
+        "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
@@ -141,10 +136,10 @@
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.0,
-        "min_via_annular_width": 0.075,
-        "min_via_diameter": 0.25,
-        "solder_mask_to_copper_clearance": 0.005,
+        "min_track_width": 0.15,
+        "min_via_annular_width": 0.1,
+        "min_via_diameter": 0.5,
+        "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -193,11 +188,12 @@
       ],
       "track_widths": [
         0.0,
-        0.1,
-        0.15,
         0.254,
+        0.3048,
         0.381,
-        0.508
+        0.508,
+        2.54,
+        10.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -231,8 +227,12 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.5,
+          "diameter": 0.45,
           "drill": 0.3
+        },
+        {
+          "diameter": 0.55,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -432,7 +432,6 @@
       "bus_entry_needed": "error",
       "bus_to_bus_conflict": "error",
       "bus_to_net_conflict": "error",
-      "conflicting_netclasses": "error",
       "different_unit_footprint": "error",
       "different_unit_net": "error",
       "duplicate_reference": "error",
@@ -458,7 +457,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "same_local_global_label": "warning",
       "similar_label_and_power": "warning",
@@ -478,17 +477,17 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "DroneController.kicad_pro",
+    "filename": "ESC_Board.kicad_pro",
     "version": 3
   },
   "net_settings": {
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.0,
-        "diff_pair_gap": 0.2032,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.146812,
+        "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -514,7 +513,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "production/",
+      "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
@@ -544,19 +543,19 @@
           "group_by": false,
           "label": "Reference",
           "name": "Reference",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Qty",
           "name": "${QUANTITY}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
           "label": "Value",
           "name": "Value",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -590,140 +589,74 @@
         },
         {
           "group_by": false,
-          "label": "Description",
-          "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Class",
-          "name": "Class",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Crystal Type",
-          "name": "Crystal Type",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DC Resistance (DCR)",
-          "name": "DC Resistance (DCR)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Frequency",
-          "name": "Frequency",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Frequency - Self Resonant",
-          "name": "Frequency - Self Resonant",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Frequency Stability",
-          "name": "Frequency Stability",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Frequency Tolerance",
-          "name": "Frequency Tolerance",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Inductance",
-          "name": "Inductance",
-          "show": false
+          "label": "Capacitance",
+          "name": "Capacitance",
+          "show": true
         },
         {
           "group_by": false,
           "label": "Category",
           "name": "Category",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
-          "label": "Load Capacitance",
-          "name": "Load Capacitance",
-          "show": false
+          "label": "Class",
+          "name": "Class",
+          "show": true
         },
         {
           "group_by": false,
-          "label": "Operating Temperature",
-          "name": "Operating Temperature",
-          "show": false
+          "label": "LCSC",
+          "name": "LCSC",
+          "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Manufacturer",
+          "name": "Manufacturer",
+          "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Minimum Qty",
+          "name": "Minimum Qty",
+          "show": true
         },
         {
           "group_by": false,
           "label": "Operating Temperature Range",
           "name": "Operating Temperature Range",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Overload Voltage (Max)",
           "name": "Overload Voltage (Max)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PACKAGE",
-          "name": "PACKAGE",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PRICE",
-          "name": "PRICE",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Part",
           "name": "Part",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Power(Watts)",
           "name": "Power(Watts)",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Price",
           "name": "Price",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
           "label": "Process",
           "name": "Process",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Q @ Freq",
-          "name": "Q @ Freq",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Rated Current",
-          "name": "Rated Current",
           "show": false
         },
         {
@@ -764,92 +697,26 @@
         },
         {
           "group_by": false,
-          "label": "AVAILABILITY",
-          "name": "AVAILABILITY",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Attrition Qty",
           "name": "Attrition Qty",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
-          "label": "Capacitance",
-          "name": "Capacitance",
-          "show": false
+          "label": "Description",
+          "name": "Description",
+          "show": true
         },
         {
           "group_by": false,
-          "label": "Diode Configuration",
-          "name": "Diode Configuration",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Dominant Wavelength",
-          "name": "Dominant Wavelength",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Drain Source On Resistance (RDS(on)@Vgs,Id)",
-          "name": "Drain Source On Resistance (RDS(on)@Vgs,Id)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Gate Threshold Voltage (Vgs(th)@Id)",
-          "name": "Gate Threshold Voltage (Vgs(th)@Id)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Continuous Drain Current (Id)",
-          "name": "Continuous Drain Current (Id)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Drain Source Voltage (Vdss)",
-          "name": "Drain Source Voltage (Vdss)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Input Capacitance (Ciss@Vds)",
-          "name": "Input Capacitance (Ciss@Vds)",
-          "show": false
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": true
         },
         {
           "group_by": false,
           "label": "Emitted Color",
           "name": "Emitted Color",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Forward Current",
-          "name": "Forward Current",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Total Gate Charge (Qg@Vgs)",
-          "name": "Total Gate Charge (Qg@Vgs)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Viewing Angle",
-          "name": "Viewing Angle",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Forward Voltage (VF)",
-          "name": "Forward Voltage (VF)",
           "show": false
         },
         {
@@ -866,44 +733,302 @@
         },
         {
           "group_by": false,
+          "label": "Forward Current",
+          "name": "Forward Current",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Forward Voltage (VF)",
+          "name": "Forward Voltage (VF)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Gate Threshold Voltage (Vgs(th)@Id)",
+          "name": "Gate Threshold Voltage (Vgs(th)@Id)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Input Capacitance (Ciss@Vds)",
+          "name": "Input Capacitance (Ciss@Vds)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Continuous Drain Current (Id)",
+          "name": "Continuous Drain Current (Id)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Lens Color",
+          "name": "Lens Color",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "Luminous Intensity",
           "name": "Luminous Intensity",
           "show": false
         },
         {
           "group_by": false,
-          "label": "Manufacturer Product Number ",
-          "name": "Manufacturer Product Number ",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Digikey Part Number",
-          "name": "Digikey Part Number",
+          "label": "Total Gate Charge (Qg@Vgs)",
+          "name": "Total Gate Charge (Qg@Vgs)",
           "show": false
         },
         {
           "group_by": false,
-          "label": "LCSC Part Number",
-          "name": "LCSC Part Number",
+          "label": "Diode Configuration",
+          "name": "Diode Configuration",
           "show": false
         },
         {
           "group_by": false,
-          "label": "Manufacturer",
-          "name": "Manufacturer",
+          "label": "Viewing Angle",
+          "name": "Viewing Angle",
           "show": false
         },
         {
           "group_by": false,
-          "label": "LCSC",
-          "name": "LCSC",
+          "label": "Dominant Wavelength",
+          "name": "Dominant Wavelength",
           "show": false
         },
         {
           "group_by": false,
-          "label": "Minimum Qty",
-          "name": "Minimum Qty",
+          "label": "Operating Temperature",
+          "name": "Operating Temperature",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Drain Source On Resistance (RDS(on)@Vgs,Id)",
+          "name": "Drain Source On Resistance (RDS(on)@Vgs,Id)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Drain Source Voltage (Vdss)",
+          "name": "Drain Source Voltage (Vdss)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CASE",
+          "name": "CASE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CONFIGURATION",
+          "name": "CONFIGURATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PACKAGE",
+          "name": "PACKAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PARTREV",
+          "name": "PARTREV",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PART_DESCRIPTION",
+          "name": "PART_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PITCH",
+          "name": "PITCH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PUBLISHED",
+          "name": "PUBLISHED",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PUBLISHER",
+          "name": "PUBLISHER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LIBRARY_REF",
+          "name": "LIBRARY_REF",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CONNECTOR",
+          "name": "CONNECTOR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LIBRARY_PATH",
+          "name": "LIBRARY_PATH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DESIGNATOR",
+          "name": "DESIGNATOR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER_LINK",
+          "name": "MANUFACTURER_LINK",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_REFERANCE",
+          "name": "FOOTPRINT_REFERANCE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "RESISTANCE",
+          "name": "RESISTANCE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ROHS_COMPLIANT",
+          "name": "ROHS_COMPLIANT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ORIENTATION",
+          "name": "ORIENTATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SERIES",
+          "name": "SERIES",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SIGNAL_INTEGRITY",
+          "name": "SIGNAL_INTEGRITY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SPICE_MODEL",
+          "name": "SPICE_MODEL",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "STANDARD",
+          "name": "STANDARD",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NO_OF_POSITION",
+          "name": "NO_OF_POSITION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TECHNOLOGY",
+          "name": "TECHNOLOGY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TE_PART_NUMBER",
+          "name": "TE_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TYPE",
+          "name": "TYPE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "GENDER",
+          "name": "GENDER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FINISH",
+          "name": "FINISH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER",
+          "name": "MANUFACTURER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT",
+          "name": "FOOTPRINT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VOLTAGE_AC",
+          "name": "VOLTAGE_AC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VOLTAGE_DC",
+          "name": "VOLTAGE_DC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CURRENT_RATING",
+          "name": "CURRENT_RATING",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_PATH",
+          "name": "FOOTPRINT_PATH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "APPLICATION",
+          "name": "APPLICATION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LATEST_REVISION_DATE",
+          "name": "LATEST_REVISION_DATE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LATEST_REVISION_NOTE",
+          "name": "LATEST_REVISION_NOTE",
           "show": false
         }
       ],
@@ -912,7 +1037,7 @@
       "include_excluded_from_bom": true,
       "name": "",
       "sort_asc": true,
-      "sort_field": "LCSC Part Number"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -956,8 +1081,20 @@
   },
   "sheets": [
     [
-      "89a72cea-fd24-4c2f-bde8-6b43291d77f4",
+      "c7f275f7-0597-4a7d-8593-149a5f6bff0e",
       "Root"
+    ],
+    [
+      "9e1d2821-f1df-434d-8876-e300db53ae65",
+      "ESC2.sch"
+    ],
+    [
+      "4eff5a11-7eb4-4571-a19f-d1a82cee147a",
+      "ESC3.sch1"
+    ],
+    [
+      "3f1533d3-495b-45f6-9720-37aad431e069",
+      "ESC4.sch2"
     ]
   ],
   "text_variables": {}

@@ -1,0 +1,3 @@
+../Core/Src/W25Q16V.c:5:20:CS_L	1
+../Core/Src/W25Q16V.c:6:20:CS_H	1
+../Core/Src/W25Q16V.c:8:19:W25_ReadJEDEC	2
