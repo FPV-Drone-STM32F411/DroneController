@@ -1,0 +1,12 @@
+../Core/Src/ICM-42605.c:3:20:CS_L	1
+../Core/Src/ICM-42605.c:4:20:CS_H	1
+../Core/Src/ICM-42605.c:6:23:be16	1
+../Core/Src/ICM-42605.c:10:19:icm42605_bank_select	6
+../Core/Src/ICM-42605.c:41:19:icm42605_write_reg	3
+../Core/Src/ICM-42605.c:61:19:icm42605_read_reg	3
+../Core/Src/ICM-42605.c:80:19:icm42605_read_multi	5
+../Core/Src/ICM-42605.c:99:19:icm42605_reset	2
+../Core/Src/ICM-42605.c:115:19:icm42605_config_accel	8
+../Core/Src/ICM-42605.c:152:19:icm42605_config_gyro	8
+../Core/Src/ICM-42605.c:193:19:icm42605_read_accel	2
+../Core/Src/ICM-42605.c:207:19:icm42605_read_gyro	2

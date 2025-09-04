@@ -53,12 +53,21 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+extern SPI_HandleTypeDef hspi1;
+extern SPI_HandleTypeDef hspi2;
+extern SPI_HandleTypeDef hspi3;
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
 #define LED_Pin GPIO_PIN_1
 #define LED_GPIO_Port GPIOA
+#define NSS1_Pin GPIO_PIN_4
+#define NSS1_GPIO_Port GPIOA
+#define NSS2_Pin GPIO_PIN_12
+#define NSS2_GPIO_Port GPIOB
+#define NSS3_Pin GPIO_PIN_15
+#define NSS3_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 

@@ -22,6 +22,38 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ICM-42605.h"
+#include "BMP280.h"
+#include "GPS.h"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#define SEA_LEVEL_PA     101325.0f
+
+extern volatile uint32_t gps_irq_events;
+extern volatile uint32_t gps_rx_total;
+
+static void gps_print_sentence(const char *nmea) {
+    printf("%s\r\n", nmea);   // prints full, checksum-valid NMEA lines
+}
+
+static void gps_print_fix(const GPS_Fix_t *fix) {
+    if (fix->valid) {
+        printf("[GPS FIX] %02d:%02d:%02d %02d/%02d/%02d\r\n",
+               fix->hour, fix->minute, fix->second,
+               fix->day, fix->month, fix->year);
+        printf("          Lat=%.6f Lon=%.6f Alt=%.1fm\r\n",
+               fix->latitude_deg, fix->longitude_deg, fix->altitude_m);
+        printf("          Speed=%.1fkn Course=%.1f° HDOP=%.1f Sats=%d\r\n",
+               fix->speed_knots, fix->course_deg, fix->hdop, fix->sats_in_use);
+    } else {
+        printf("[GPS] No valid fix\r\n");
+    }
+}
+
+
+
 
 /* USER CODE END Includes */
 
@@ -45,28 +77,53 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 
-USART_HandleTypeDef husart1;
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
+/* USER CODE BEGIN PV */
+
+// ===== choose the BMP280 CS you actually wired =====
+#define BMP280_CS_GPIO   GPIOA         // e.g., GPIOA
+#define BMP280_CS_PIN    NSS3_Pin      // e.g., your NSS3 pin
+#define SEA_LEVEL_PA     101325.0f
+
+static BMP280_HandleTypeDef bmp;
+
+static void BMP280_AppInit(void);      // forward decl
+
+// (optional) keep these here so you don't redeclare inside the loop
+static uint32_t last_irq = 0, last_bytes = 0;
+
+/* USER CODE END PV */
+
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_SPI3_Init(void);
-static void MX_USART1_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+/* USER CODE BEGIN PFP */
+
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+//printf redirection
+//int _write(int file, char *ptr, int len) {
+//    HAL_UART_Transmit(&husart1, (uint8_t*)ptr, len, HAL_MAX_DELAY);
+///    return len;
+//}
 /* USER CODE END 0 */
 
 /**
@@ -98,38 +155,181 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_SPI1_Init();
   MX_SPI2_Init();
   MX_SPI3_Init();
-  MX_USART1_Init();
   MX_USART2_UART_Init();
   MX_USB_DEVICE_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  // Make sure BMP280 CS idles HIGH before first SPI transaction
+  HAL_GPIO_WritePin(BMP280_CS_GPIO, BMP280_CS_PIN, GPIO_PIN_SET);
+
+  // Initialize/configure BMP280
+  BMP280_AppInit();
+
+#define BMP280_CS_GPIO   GPIOA      // I’m assuming your BMP280 CS is on GPIOA
+#define BMP280_CS_PIN    NSS3_Pin   // and uses your NSS3 pin
+  __HAL_LINKDMA(&huart1, hdmarx, hdma_usart1_rx);  // <-- MUST exist
+  // after MX_DMA_Init() and MX_USART1_UART_Init()
+  HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(USART1_IRQn);
+
+  printf("USB CDC up!\n");
+
+  uint8_t id[3];
+ 	  if (W25_ReadJEDEC(id) == HAL_OK){
+ 	     printf("JEDEC: %02X %02X %02X\r\n", id[0], id[1], id[2]);
+ 	     HAL_GPIO_TogglePin (GPIOA, LED_Pin);
+ 	     HAL_Delay(1000);
+ 	     HAL_GPIO_TogglePin (GPIOA, LED_Pin);
+ 	    } else {
+ 	     printf("JEDEC read failed\r\n");
+ 	    }
+
+
+
+ 	uint8_t whoami;
+ 	HAL_StatusTypeDef whoami_test;
+
+ 	whoami_test = icm42605_read_reg(0,0x75, &whoami);
+ 	if (whoami_test == HAL_OK) {
+ 	    if (whoami == 0x42) {
+ 	        printf("Confirmed ICM WHOAMI: 0x%02X\r\n", whoami);
+ 	        HAL_GPIO_TogglePin(GPIOA, LED_Pin);
+ 	        HAL_Delay(500);
+ 	        HAL_GPIO_TogglePin(GPIOA, LED_Pin);
+ 	    } else {
+ 	        printf("ICM WHOAMI mismatch: got 0x%02X (expected 0x42)\r\n", whoami);
+ 	    }
+ 	} else {
+ 	    printf("Failed to read WHOAMI register (status: %d)\r\n", whoami_test);
+ 	}
+ 	// Reset chip
+ 	icm42605_reset();
+
+ 	// Configure accelerometer and gyro
+ 	icm42605_config_accel(ACCEL_FS_2G, ACCEL_ODR_1KHZ);
+ 	icm42605_config_gyro(GYRO_FS_2000DPS, GYRO_ODR_1KHZ);
+
+
+ 	//gps init
+ 	static GPS_Handle_t gps;
+ 	  GPS_Init(&gps, &huart1, GPS_RXMODE_DMA, NULL);
+
+ 	  // Set GPS callbacks
+ 	  gps.on_sentence = gps_print_sentence;
+ 	  gps.on_fix = gps_print_fix;
+
+ 	  // Start GPS
+ 	  HAL_StatusTypeDef st = GPS_Start(&gps);
+ 	  printf("GPS Start: status=%d, huart1.hdmarx=%p, err=0x%08lx\r\n",
+ 	         st, (void*)huart1.hdmarx, huart1.ErrorCode);
+
+ 	  if (st != HAL_OK) {
+ 	      printf("GPS_Start failed: %d\r\n", st);
+ 	      printf("Check: 1) USART1 RX DMA enabled in CubeMX\r\n");
+ 	      printf("       2) DMA2_Stream2 IRQ enabled\r\n");
+ 	      printf("       3) Correct GPIO pins assigned\r\n");
+ 	  } else {
+ 	      printf("GPS started successfully - waiting for data...\r\n");
+ 	  }
+
+
+
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t id[3];
- 	  if (W25_ReadJEDEC(id) == HAL_OK){
- 	     printf("JEDEC: %02X %02X %02X\r\n", id[0], id[1], id[2]);
- 	     HAL_GPIO_TogglePin (GPIOA, LED_Pin);
- 	     HAL_Delay(500);
- 	     HAL_GPIO_TogglePin (GPIOA, LED_Pin);
- 	     HAL_Delay(500);
- 	     HAL_GPIO_TogglePin (GPIOA, LED_Pin);
- 	    } else {
- 	     printf("JEDEC read failed\r\n");
+ 	int16_t accel[3];
+ 	int16_t gyro[3];
+
+ 	float ax_ms2, ay_ms2, az_ms2;
+ 	float gx_dps, gy_dps, gz_dps;
+ 	float pitch_deg, roll_deg;
+
+ 	uint32_t last_gps_debug = 0;
+ 	uint32_t last_imu_print = 0;
+ 	uint32_t last_irq = 0, last_bytes = 0;
+
+ 	uint32_t next_bmp      = HAL_GetTick();   // 5 Hz BMP280
+ 	uint32_t next_imu_print= HAL_GetTick();   // 1 Hz IMU
+ 	uint32_t next_gps_dbg  = HAL_GetTick();   // 1 Hz GPS debug
+
+ 	printf("Enter while(1)\r\n");
+ 	BMP280_AppInit();
+ 	while (1)
+ 	{
+
+ 		GPS_Process(&gps);
+ 		static uint32_t last_irq=0, last_bytes=0;
+ 		if (HAL_GetTick() - last_gps_debug > 1000) {
+ 		      last_gps_debug = HAL_GetTick();
+ 		      printf("[GPS Debug] IRQ events=%lu(+%lu) RX bytes=%lu(+%lu)\r\n",
+ 		             gps_irq_events, gps_irq_events - last_irq,
+ 		             gps_rx_total, gps_rx_total - last_bytes);
+ 		      last_irq = gps_irq_events;
+ 		      last_bytes = gps_rx_total;
+
+ 		      // Show current fix status
+ 		      if (gps.fix.valid) {
+ 		          printf("[GPS Status] Valid fix with %d satellites\r\n", gps.fix.sats_in_use);
+ 		      } else {
+ 		          printf("[GPS Status] Searching for satellites...\r\n");
+ 		      }
+ 		    }
+ 	    // --- Read and convert accelerometer ---
+ 	    if (icm42605_read_accel(accel) == HAL_OK)
+ 	    {
+ 	        // Convert to m/s²
+ 	        ax_ms2 = (accel[0] / ACCEL_LSB_PER_G) * G_IN_MS2;
+ 	        ay_ms2 = (accel[1] / ACCEL_LSB_PER_G) * G_IN_MS2;
+ 	        az_ms2 = (accel[2] / ACCEL_LSB_PER_G) * G_IN_MS2;
  	    }
-  while (1)
-  {
 
+ 	    // --- Read and convert gyroscope ---
+ 	    if (icm42605_read_gyro(gyro) == HAL_OK)
+ 	    {
+ 	        // Convert to °/s
+ 	        gx_dps = gyro[0] / GYRO_LSB_PER_DPS;
+ 	        gy_dps = gyro[1] / GYRO_LSB_PER_DPS;
+ 	        gz_dps = gyro[2] / GYRO_LSB_PER_DPS;
+ 	    }
 
+ 	    // --- Calculate pitch and roll angles ---
+ 	    float ax_g = accel[0] / ACCEL_LSB_PER_G;
+ 	    float ay_g = accel[1] / ACCEL_LSB_PER_G;
+ 	    float az_g = accel[2] / ACCEL_LSB_PER_G;
+
+ 	    pitch_deg = atan2f(-ax_g, sqrtf(ay_g * ay_g + az_g * az_g)) * (180.0f / M_PI);
+ 	    roll_deg  = atan2f( ay_g, az_g ) * (180.0f / M_PI);
+
+ 	    // --- Print formatted, readable values ---
+ 	    printf("[IMU: Accel] (m/s²): X=%.2f Y=%.2f Z=%.2f\r\n", ax_ms2, ay_ms2, az_ms2);
+ 	    printf("[IMU: Gyro] (°/s): X=%.2f Y=%.2f Z=%.2f\r\n", gx_dps, gy_dps, gz_dps);
+ 	    printf("[IMU: Angles] (deg): Pitch=%.2f Roll=%.2f\r\n", pitch_deg, roll_deg);
+
+ 	    HAL_Delay(1000); // ~20 Hz refresh for readability
+
+ 	    // --- BMP280 read (5 Hz) ---
+ 	      if ((int32_t)(HAL_GetTick() - next_bmp) >= 0) {
+ 	          next_bmp += 200;
+
+ 	          float t_c, p_pa;
+ 	          if (bmp280_read_temp_press(&bmp, &t_c, &p_pa) == HAL_OK) {
+ 	              float alt_m = bmp280_altitude_m_from_pa(p_pa, SEA_LEVEL_PA);
+ 	              printf("[BMP280] T=%.2f C  P=%.1f Pa  Alt=%.1f m\r\n", t_c, p_pa, alt_m);
+ 	          }
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+ 	      }
+ 	}
   /* USER CODE END 3 */
 }
+
 
 /**
   * @brief System Clock Configuration
@@ -295,7 +495,7 @@ static void MX_SPI3_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART1_Init(void)
+static void MX_USART1_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART1_Init 0 */
@@ -305,16 +505,15 @@ static void MX_USART1_Init(void)
   /* USER CODE BEGIN USART1_Init 1 */
 
   /* USER CODE END USART1_Init 1 */
-  husart1.Instance = USART1;
-  husart1.Init.BaudRate = 115200;
-  husart1.Init.WordLength = USART_WORDLENGTH_8B;
-  husart1.Init.StopBits = USART_STOPBITS_1;
-  husart1.Init.Parity = USART_PARITY_NONE;
-  husart1.Init.Mode = USART_MODE_TX_RX;
-  husart1.Init.CLKPolarity = USART_POLARITY_LOW;
-  husart1.Init.CLKPhase = USART_PHASE_1EDGE;
-  husart1.Init.CLKLastBit = USART_LASTBIT_DISABLE;
-  if (HAL_USART_Init(&husart1) != HAL_OK)
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -358,6 +557,22 @@ static void MX_USART2_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -366,7 +581,8 @@ static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
-
+  	HAL_GPIO_WritePin(GPIOA, NSS1_Pin|NSS3_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(NSS2_GPIO_Port, NSS2_Pin, GPIO_PIN_SET);
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
@@ -375,24 +591,24 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_Pin|GPIO_PIN_4|GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_Pin|NSS1_Pin|NSS3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(NSS2_GPIO_Port, NSS2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_Pin PA4 PA15 */
-  GPIO_InitStruct.Pin = LED_Pin|GPIO_PIN_4|GPIO_PIN_15;
+  /*Configure GPIO pins : LED_Pin NSS1_Pin NSS3_Pin */
+  GPIO_InitStruct.Pin = LED_Pin|NSS1_Pin|NSS3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PB12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  /*Configure GPIO pin : NSS2_Pin */
+  GPIO_InitStruct.Pin = NSS2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(NSS2_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
@@ -400,6 +616,24 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+static void BMP280_AppInit(void)
+{
+    if (bmp280_init_spi(&bmp, &hspi3, BMP280_CS_GPIO, BMP280_CS_PIN) != HAL_OK) {
+        Error_Handler();
+    }
+    // Write CONFIG while device is in sleep (after reset)
+    bmp280_set_config(&bmp, BMP280_TSB_125_MS, BMP280_FILTER_4, false);
+    // Start continuous conversions
+    bmp280_set_ctrl_meas(&bmp, BMP280_OSRS_X1, BMP280_OSRS_X4, BMP280_MODE_NORMAL);
+
+    // Sanity read
+    float t, p;
+    if (bmp280_read_temp_press(&bmp, &t, &p) == HAL_OK) {
+        float alt = bmp280_altitude_m_from_pa(p, SEA_LEVEL_PA);
+        (void)alt;
+    }
+}
 
 /* USER CODE END 4 */
 

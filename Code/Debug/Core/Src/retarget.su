@@ -1,0 +1,2 @@
+../Core/Src/retarget.c:5:12:cdc_write	24	static
+../Core/Src/retarget.c:15:5:_write	32	static
