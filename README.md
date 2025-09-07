@@ -165,7 +165,7 @@ This project is released under the MIT License. All design files, including sche
 
 ## Resources
 
-- [PCBWay](https://betaflight.com/docs/getting-started/installation](https://www.pcbway.com/)
+- [PCBWay](https://www.pcbway.com/)
 - [BetaFlight Documentation](https://betaflight.com/docs/getting-started/installation)
 - [STM32F4 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0383-stm32f411xce-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
 - [ESB8 GitHub Repository](https://github.com/esb8)
