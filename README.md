@@ -1,18 +1,17 @@
 
 # FPV Drone PCB Full PCB + Assembly
 
-A comprehensive open-source avionics ecosystem for FPV drones featuring a completed flight computer PCB along with in-development power distribution and electronic speed controller PCB. This project delivers an avionics stack for a custom drone with full schematic and PCB files available on KiCad 9.0.
+A comprehensive open-source avionics ecosystem for FPV drones featuring a flight computer PCB along with a power distribution and electronic speed controller PCB. This project delivers an avionics stack for a custom drone with full schematic and PCB files available on KiCad 9.0.
 
 ## Overview
 
-This project aims to create a FPV drone with a custom all-in-one (AIO) PCB that combines the flight controller, power distribution, and ESC functionality. Built around the STM32F411CEU6 microcontroller, this drone follows BetaFlight and AM32 design requirements while providing a clean and efficient build.
+This project aims to develop an FPV drone using two custom PCBs: a flight controller and a power distribution/ESC board. Both are built around the STM32 chipset and designed to be compatible with BetaFlight and AM32 requirements, ensuring a clean and efficient build.
 
 ## Hardware 
 
  **Integrated PCB Design**
   - Flight Controller: STM32F411CEU6 (ARM Cortex M4)
-  - Power Distribution: High-current paths with filtering
-  - ESC: AM32 compatible 4-in-1 design
+  - Power Distribution/ESC: High-current paths, AM32 compatible design
     
  **Connectivity**
   - All peripherals utilize SPI for high-speed sensor communication
