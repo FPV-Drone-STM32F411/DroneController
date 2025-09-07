@@ -1,17 +1,40 @@
 
-# FPV Drone PCB Full PCB + Assembly
+# FPV Drone PCB Full PCB + Code + Assembly
 
-A comprehensive open-source avionics ecosystem for FPV drones featuring a flight computer PCB along with a power distribution and electronic speed controller PCB. This project delivers an avionics stack for a custom drone with full schematic and PCB files available on KiCad 9.0.
+**A comprehensive, fully open-source FPV drone platform**: a two-board avionics stack (flight computer + power/ESC) complete with their codebase *and* a lightweight, robust airframe. All KiCad 9.0 design files, firmware, and CAD are included. Media of all PCBs, schematics and airframe are attached within this repository. 
 
 ## Overview
 
-This project aims to develop an FPV drone using two custom PCBs: a flight controller and a power distribution/ESC board. Both are built around the STM32 chipset and designed to be compatible with BetaFlight and AM32 requirements, ensuring a clean and efficient build.
+This project develops an FPV drone around two custom 5×5 PCBs: a **STM32F411 flight computer** and a **STM32F405 power distribution + ESC board**. esigned for compatibility with **Betaflight** (FC) and **AM32** (ESC). Both are built around the STM32 chipset and designed to be compatible with BetaFlight and AM32 requirements.
 
-## Hardware 
+**Manufacturing Sponsor:** Huge thanks to **[PCBWay](https://www.pcbway.com/)** for sponsoring fabrication and assembly of the MKII flight computer. Their high-quality manufacturing, quick turnaround, significantly accelerated the build process. Moreover, their service was excellent and addressed questions promptly and clearly. As a bonus, PCBWay offers affordable, unique **silkscreen colours**. PCBWay is highly recommended and proved to be a great fit for the FPV-Drone-STM32F411 project.
+
+**MKII Flight Computer 3D Model**
+
+<img width="1088" height="837" alt="image" src="https://github.com/user-attachments/assets/3e55b5f0-1f1c-447c-a083-5341c130609a" />
+
+**What’s new (MKII & Airframe)**
+- **MKII Flight Computer:** UART and SWD flash options, cost-efficient and compact IMU (ICM-42605), oscilloscope-friendly SPI test pads, expanded test points, JST connectors, improved routing for debugability.
+- **Open-Source Airframe:** integrated landing legs, structural reinforcements, and geometry to accommodate **~935 KV BLDC motors**; CAD provided for easy printing/mods.
+
+## Airframe
+
+The airframe is designed to be **robust and lightweight** with:
+- **Integrated landing legs** and **structural reinforcements** for durability  
+- Geometry to suit **~935 KV** brushless motors (modeled in CAD)  
+- CAD provided for printing and customization
+
+**Printing tips (suggested):**
+- Arms/plates: CF-reinforced nylon or strong PLA+/PETG  
+- Landing legs: TPU for impact absorption
+- Verify clearances for your chosen motor + prop combo (aimed at 5″ class)
+
+
+## Hardware Details
 
  **Integrated PCB Design**
   - Flight Controller: STM32F411CEU6 (ARM Cortex M4)
-  - Power Distribution/ESC: High-current paths, AM32 compatible design
+  - Power/ESC Board: High-current paths, AM32 compatible design
     
  **Connectivity**
   - All peripherals utilize SPI for high-speed sensor communication
@@ -36,13 +59,12 @@ This project aims to develop an FPV drone using two custom PCBs: a flight contro
 - DC-DC buck converter for efficient power regulation
 - Support for 3S-4S LiPo batteries (11.1V-16.8V)
 - XT-60 connector for battery input
-- Electric Speed Controller for four BLDC motors
+- Electric Speed Controller for a BLDC motor
 
-**ESC (Electronic Speed Controller)**
+**Electronic Speed Controller (ESC)**
 - AM32 compatible
-- 30A motor capability
+- 10A 935 KV motor capability
 - Thermal management design
- 
 
 ## Software Compatibility
 
@@ -51,60 +73,61 @@ This drone design is compatible with:
 - INAV (for GPS functions)
 - Ardupilot (for autonomous capabilities)
 - AM32 (for ESC functionality)
-
+- STM32CUBEIDE (Coded in C for entire codebase)
 
 ### Bill of Materials
 
 | Component | Description | Specification |
 |-----------|-------------|---------------|
-| Frame | 3D printed carbon fiber | 5" freestyle/racing frame |
-| Motors | Brushless | SpeedyBee 1800KV (recommended) |
+| Frame | Open-Source CAD | 5″ class geometry w/ landing legs   |
+| Motors | Brushless | 935 KV (example: 1800 KV 5″ also viable) |
 | Battery | LiPo | 4S 1500mAh 100C (recommended) |
 | Propellers | 5-inch | Matched to motor and frame |
 | Camera | FPV | CCD or CMOS based on preference |
 | Video Transmitter | 5.8GHz | Power output based on needs |
 | Receiver | Radio control | Compatible with SX1276 LoRa Transciever |
-| LoRa Antenna | 915MHz |SMA compatible half-dipole antenna|
+| LoRa Antenna | 915MHz |SMA compatible quarter-wavelength antenna|
 
-### Tools
-- Soldering iron and solder
-- Heat shrink tubing
-- Hex drivers/screwdrivers
-- LiPo battery charger
-- Multimeter
-- KiCAD for PCB design modifications
-- Zip ties
-- Double-sided foam tape
 
 ### Electronics Knowledge
 - Basic soldering skills
 - Understanding of power systems
 - Familiarity with microcontrollers
-- Ability to flash firmware
-
-## Calculations
-
-### Power System
-- Max Current = 4 motors × 30A = 120A
-- Required C Rating = 120A / 1.5Ah = 80C minimum
-- Flight time estimate = (1500mAh) ÷ (Average current draw) × 60 × 0.8
-
-### Weight Budget
-- Target all-up-weight: ~500g (5" freestyle quad)
-- Battery weight: ~120-150g (4S 1500mAh)
-- Component weight distribution accordingly
+- Ability to flash firmware through CUBEIDE
 
 ## Testing Procedures
 
 1. Power system verification (voltage output, regulation)
 2. Motor/ESC testing with oscillosocpe
-3. Sensor calibration and verification
-4. Radio range and failsafe testing
-5. Controlled hover tests
-6. Full flight testing
+3. SPI testing using oscciloscope test pads
+4. Sensor calibration and verification
+5. Radio range and failsafe testing
+6. Controlled hover tests
+7. Full flight testing
 
 # Media
-### MKI of Electric Speed Controller (ESC)
+## Most Updated
+### Airframe
+<img width="2110" height="1390" alt="image" src="https://github.com/user-attachments/assets/0459f5f7-6173-4ced-ada2-ff094f02f9b5" />
+<img width="1932" height="942" alt="image" src="https://github.com/user-attachments/assets/19bf64d2-7da5-420a-b73a-6fbba0fd5355" />
+
+
+### MKII of Flight Computer 
+
+**MKII Flight Computer 3D Model**
+
+
+<img width="1088" height="837" alt="image" src="https://github.com/user-attachments/assets/3e55b5f0-1f1c-447c-a083-5341c130609a" />
+
+
+**MKII Flight Computer PCB**
+
+<img width="1116" height="1026" alt="image" src="https://github.com/user-attachments/assets/8e14f005-45c7-44f8-8ec0-955a119deb0c" />
+
+**MKI Flight Computer Schematic**
+<img width="2002" height="1378" alt="image" src="https://github.com/user-attachments/assets/a0e9ac33-9647-4282-bd55-7698e77d00b0" />
+
+### MKI of Electric Speed Controller 
 
 **MKI of ESC 3D Model**
 
@@ -118,29 +141,8 @@ This drone design is compatible with:
 
 <img width="828" height="537" alt="image" src="https://github.com/user-attachments/assets/091e5204-9e30-41e9-a268-0c44c239c64b" />
 
-
-### MKII of Flight Computer (Most Updated)
-
-**MKII Flight Computer 3D Model**
-
-
-<img width="1088" height="837" alt="image" src="https://github.com/user-attachments/assets/3e55b5f0-1f1c-447c-a083-5341c130609a" />
-
-
-
-
-
-
-
-**MKII Flight Computer PCB**
-
-<img width="1116" height="1026" alt="image" src="https://github.com/user-attachments/assets/8e14f005-45c7-44f8-8ec0-955a119deb0c" />
-
-
-### MKII of Flight Computer
-**MKI Flight Computer Schematic**
-<img width="2002" height="1378" alt="image" src="https://github.com/user-attachments/assets/a0e9ac33-9647-4282-bd55-7698e77d00b0" />
-
+## Historical
+### MKI of Flight Computer
 **MKI Flight Computer 3D Model**
 
 ![image](https://github.com/user-attachments/assets/9c4938de-f330-492c-8345-230773f7fb7f)
@@ -153,13 +155,9 @@ This drone design is compatible with:
 ![image](https://github.com/user-attachments/assets/66eaace1-5f99-4fdb-9aa4-7867878309cd)
 
 
-
-
-
-
 ## Collaboration
 
-This project is in collaboration with Ammar Mahmood and esb8, All PCB designs, firmware modifications, and build documentation are developed jointly to ensure the highest quality and performance.
+This project is in collaboration with Ammar Mahmood and esb8, all PCB designs, CAD modelling, firmware modifications, and build documentation are developed jointly to ensure the highest quality and performance.
 
 ## License
 
@@ -172,13 +170,6 @@ This project is released under the MIT License. All design files, including sche
 - [ESB8 GitHub Repository](https://github.com/esb8)
 - [Ammar Github Repository](https://github.com/ammarjmahmood)
 - [Project GitHub Repository](https://github.com/your-username/esb8-fpv-drone)
-
-## Contributing
-
-We welcome contributions to this project! If you have suggestions, bug reports, or want to contribute code, please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
 
 ---
 *This FPV drone project aims to combine and create a full documentation on the latest in drone technology with custom-designed electronics to create a high-performance, reliable platform for racing, freestyle, or aerial photography.*
