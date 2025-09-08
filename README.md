@@ -116,22 +116,26 @@ This drone design is compatible with:
 
 **MKII Flight Computer 3D Model**
 
-
 <img width="1088" height="837" alt="image" src="https://github.com/user-attachments/assets/3e55b5f0-1f1c-447c-a083-5341c130609a" />
-
 
 **MKII Flight Computer PCB**
 
-<img width="1116" height="1026" alt="image" src="https://github.com/user-attachments/assets/8e14f005-45c7-44f8-8ec0-955a119deb0c" />
+<img width="1116" height="1026" alt="image" src="https://github.com/user-attachments/assets/8e14f005-45c7-44f8-8ec0-955a119deb0c" />\
 
 **MKI Flight Computer Schematic**
 <img width="2002" height="1378" alt="image" src="https://github.com/user-attachments/assets/a0e9ac33-9647-4282-bd55-7698e77d00b0" />
+
+**MKII Flight Computer Firmware Data Acquistion**
+
+***Disclaimer: GPS outputs are example outputs***
+
+![DATA](https://github.com/user-attachments/assets/d2ab88a2-30a0-430f-bdde-606e0899f686)
 
 ### MKI of Electric Speed Controller 
 
 **MKI of ESC 3D Model**
 
-<img width="885" height="836" alt="image" src="https://github.com/user-attachments/assets/f082285e-2f15-4693-bd55-5e7dd71b4ff9" />
+<img width="911" height="907" alt="ESCV1" src="https://github.com/user-attachments/assets/b8662e06-55a8-46e5-ae89-954d1423756f" />
 
 **MKI of ESC PCB**
 
