@@ -1,7 +1,9 @@
 ../Core/Src/W25Q16V.c:3:20:CS_L	1
 ../Core/Src/W25Q16V.c:4:20:CS_H	1
 ../Core/Src/W25Q16V.c:6:19:W25_ReadJEDEC	2
-../Core/Src/W25Q16V.c:24:6:W25_SendWrite	1
-../Core/Src/W25Q16V.c:32:6:W25_BusySense	2
-../Core/Src/W25Q16V.c:47:6:W25_GlobalUnlock	1
-../Core/Src/W25Q16V.c:57:19:W25_Write	4
+../Core/Src/W25Q16V.c:22:17:SPI_Reinit_To_Baud	7
+../Core/Src/W25Q16V.c:48:6:W25_OutputClock	2
+../Core/Src/W25Q16V.c:66:6:W25_SendWrite	1
+../Core/Src/W25Q16V.c:74:6:W25_BusySense	2
+../Core/Src/W25Q16V.c:89:6:W25_GlobalUnlock	1
+../Core/Src/W25Q16V.c:99:19:W25_Write	4

@@ -1,6 +1,7 @@
 "./Core/Src/BMP280.o"
 "./Core/Src/GPS.o"
 "./Core/Src/ICM-42605.o"
+"./Core/Src/LORA.o"
 "./Core/Src/W25Q16V.o"
 "./Core/Src/main.o"
 "./Core/Src/retarget.o"

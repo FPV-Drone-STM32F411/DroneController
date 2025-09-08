@@ -1,0 +1,13 @@
+../Core/Src/LORA.c:47:20:sx_cs_low	1
+../Core/Src/LORA.c:48:20:sx_cs_high	1
+../Core/Src/LORA.c:53:13:log_init	1
+../Core/Src/LORA.c:58:6:sx_log	2
+../Core/Src/LORA.c:67:9:sx_read	1
+../Core/Src/LORA.c:77:6:sx_write	1
+../Core/Src/LORA.c:85:6:sx_burst_write	1
+../Core/Src/LORA.c:93:6:sx_burst_read	1
+../Core/Src/LORA.c:103:6:sx_enter_lora_mode	1
+../Core/Src/LORA.c:115:6:sx_set_freq_hz	1
+../Core/Src/LORA.c:123:6:sx_detect	1
+../Core/Src/LORA.c:129:6:sx_dump	2
+../Core/Src/LORA.c:137:6:sx1276_min_demo	1

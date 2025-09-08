@@ -64,6 +64,8 @@ extern SPI_HandleTypeDef hspi3;
 #define LED_GPIO_Port GPIOA
 #define NSS1_Pin GPIO_PIN_4
 #define NSS1_GPIO_Port GPIOA
+#define NSS5_Pin GPIO_PIN_1
+#define NSS5_GPIO_Port GPIOB
 #define NSS2_Pin GPIO_PIN_12
 #define NSS2_GPIO_Port GPIOB
 #define NSS3_Pin GPIO_PIN_15
